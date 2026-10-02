@@ -1,0 +1,17 @@
+// Shared Compose config. `buildFeatures { compose = true }` is set in each module.
+import org.gradle.kotlin.dsl.dependencies
+
+plugins {
+    id("org.jetbrains.kotlin.plugin.compose")
+}
+
+val libs = the<VersionCatalogsExtension>().named("libs")
+
+dependencies {
+    add("implementation", platform(libs.findLibrary("compose-bom").get()))
+    add("implementation", libs.findLibrary("compose-ui").get())
+    add("implementation", libs.findLibrary("compose-ui-graphics").get())
+    add("implementation", libs.findLibrary("compose-ui-tooling-preview").get())
+    add("implementation", libs.findLibrary("compose-material3").get())
+    add("debugImplementation", libs.findLibrary("compose-ui-tooling").get())
+}
