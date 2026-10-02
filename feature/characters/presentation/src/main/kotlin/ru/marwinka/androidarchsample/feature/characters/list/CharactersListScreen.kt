@@ -31,8 +31,8 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import coil3.compose.AsyncImage
 import ru.marwinka.androidarchsample.core.ui.components.FullScreenError
 import ru.marwinka.androidarchsample.core.ui.components.FullScreenLoading
@@ -45,10 +45,7 @@ import ru.marwinka.androidarchsample.feature.characters.R
 fun CharactersListRoute(
     onCharacterClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: CharactersListViewModel = androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel(checkNotNull(
-        LocalViewModelStoreOwner.current) {
-                "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
-            }, null),
+    viewModel: CharactersListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     CharactersListScreen(
