@@ -14,4 +14,6 @@ dependencies {
     compileOnly(libs.gradlePlugin.kotlinCompose)
     compileOnly(libs.gradlePlugin.ksp)
     compileOnly(libs.gradlePlugin.hilt)
+
+    testImplementation(libs.junit)
 }

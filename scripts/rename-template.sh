@@ -10,7 +10,7 @@
 #   scripts/rename-template.sh com.acme.myapp AcmeApp
 #
 # Requires a clean git working tree; only tracked files are processed.
-# Not renamed: "android_arch_sample_prefs", "android_arch_sample.db".
+# Not renamed: the Room database file name "android_arch_sample.db".
 
 set -euo pipefail
 
@@ -91,6 +91,19 @@ while IFS= read -r -d '' dir; do
         git mv "$dir" "$target"
     fi
 done < <(find . -type d -regex ".*/kotlin/${OLD_PACKAGE_PATH}" -not -path '*/build/*' -print0)
+echo
+
+# Room names schema directories after the database class: <package>.database.AppDatabase.
+# Migrations need the old schema files, so the directories move with the package.
+echo "Room schema directories to move:"
+while IFS= read -r -d '' dir; do
+    name="$(basename "$dir")"
+    target="$(dirname "$dir")/${NEW_PACKAGE}${name#"$OLD_PACKAGE"}"
+    echo "  dir:   $dir -> $target"
+    if ! $DRY_RUN; then
+        git mv "$dir" "$target"
+    fi
+done < <(find . -type d -path '*/schemas/*' -name "${OLD_PACKAGE}.*" -not -path '*/build/*' -print0)
 echo
 
 if $DRY_RUN; then

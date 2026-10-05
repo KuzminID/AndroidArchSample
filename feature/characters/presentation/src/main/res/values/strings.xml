@@ -2,7 +2,9 @@
 <resources>
     <string name="characters_error_refresh_failed">Couldn\'t refresh characters. Please try again.</string>
     <string name="characters_error_network">No connection. Check your network and try again.</string>
+    <string name="characters_error_action_failed">Couldn\'t save the change. Please try again.</string>
     <string name="characters_title">Characters</string>
+    <string name="characters_empty">No characters yet. Pull down to refresh.</string>
     <string name="characters_sort_name_asc">A-Z</string>
     <string name="characters_sort_name_desc">Z-A</string>
     <string name="characters_toggle_favorite">Toggle favorite</string>

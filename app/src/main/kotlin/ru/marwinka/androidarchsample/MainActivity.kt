@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import ru.marwinka.androidarchsample.core.ui.theme.AppTheme
-import ru.marwinka.androidarchsample.feature.characters.navigation.CharactersListDestination
-import ru.marwinka.androidarchsample.feature.characters.navigation.charactersNavGraph
+import ru.marwinka.androidarchsample.designsystem.theme.AppTheme
+import ru.marwinka.androidarchsample.feature.characters.presentation.navigation.CharactersListDestination
+import ru.marwinka.androidarchsample.feature.characters.presentation.navigation.charactersNavGraph
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

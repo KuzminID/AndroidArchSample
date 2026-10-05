@@ -22,14 +22,18 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      # Module boundaries are checked while Gradle configures the build, so any step fails on a violation.
+      - name: Build logic tests
+        run: ./gradlew -p build-logic test
+
       - name: Kotlin style check
         run: ./gradlew ktlintCheck
 
-      - name: Lint
-        run: ./gradlew lint
+      - name: Static analysis
+        run: ./gradlew detekt lint
 
       - name: Unit tests
         run: ./gradlew test
 
-      - name: Assemble debug APK
-        run: ./gradlew assembleDebug
+      - name: Assemble APKs
+        run: ./gradlew assembleDebug assembleRelease

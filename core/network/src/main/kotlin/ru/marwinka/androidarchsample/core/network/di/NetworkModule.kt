@@ -11,11 +11,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import ru.marwinka.androidarchsample.core.network.BuildConfig
-import ru.marwinka.androidarchsample.core.network.CharacterApi
+import ru.marwinka.androidarchsample.core.network.RateLimitInterceptor
 import javax.inject.Singleton
 
 private const val BASE_URL = "https://rickandmortyapi.com/api/"
 
+/** HTTP client, serialization and rate limiting shared by all features; each feature creates its own API interface. */
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -28,6 +29,7 @@ object NetworkModule {
     fun provideOkHttpClient(): OkHttpClient =
         OkHttpClient
             .Builder()
+            .addInterceptor(RateLimitInterceptor())
             .addInterceptor(
                 HttpLoggingInterceptor().apply {
                     level =
@@ -47,8 +49,4 @@ object NetworkModule {
             .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
-
-    @Provides
-    @Singleton
-    fun provideCharacterApi(retrofit: Retrofit): CharacterApi = retrofit.create(CharacterApi::class.java)
 }

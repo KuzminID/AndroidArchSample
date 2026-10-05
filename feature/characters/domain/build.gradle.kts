@@ -1,24 +1,14 @@
 plugins {
-    id("androidarchsample.android.library")
-}
-
-android {
-    namespace = "ru.marwinka.androidarchsample.domain"
-
-    testFixtures {
-        enable = true
-    }
+    id("androidarchsample.jvm.library")
+    `java-test-fixtures`
 }
 
 dependencies {
-    implementation(project(":core:common"))
+    // api: AppResult and Flow are part of the repository contracts
+    api(project(":core:common"))
 
-    implementation(libs.kotlinx.coroutines.core)
+    testFixturesApi(project(":core:common"))
 
-    testFixturesImplementation(project(":core:common"))
-    testFixturesImplementation(libs.kotlinx.coroutines.core)
-
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.turbine)
     testImplementation(project(":core:testing"))
+    testImplementation(libs.turbine)
 }

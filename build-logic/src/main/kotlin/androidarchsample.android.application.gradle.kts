@@ -1,4 +1,3 @@
-// Shared Android application config.
 import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.kotlin.dsl.configure
 

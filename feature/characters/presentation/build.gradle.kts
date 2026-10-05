@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.marwinka.androidarchsample.feature.characters"
+    namespace = "ru.marwinka.androidarchsample.feature.characters.presentation"
 
     buildFeatures {
         compose = true
@@ -15,7 +15,7 @@ android {
 
 dependencies {
     implementation(project(":core:common"))
-    implementation(project(":core:ui"))
+    implementation(project(":design-system"))
     implementation(project(":feature:characters:domain"))
 
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -27,13 +27,10 @@ dependencies {
     implementation(libs.compose.material.icons.core)
 
     implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
 
     implementation(libs.hilt.navigation.compose)
 
-    testImplementation(libs.mockk)
-    testImplementation(libs.turbine)
-    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(project(":core:testing"))
+    testImplementation(libs.turbine)
     testImplementation(testFixtures(project(":feature:characters:domain")))
 }

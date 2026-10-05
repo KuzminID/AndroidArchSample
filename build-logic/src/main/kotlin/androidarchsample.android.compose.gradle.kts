@@ -1,4 +1,4 @@
-// Shared Compose config. `buildFeatures { compose = true }` is set in each module.
+// `buildFeatures { compose = true }` is set in each module.
 import org.gradle.kotlin.dsl.dependencies
 
 plugins {

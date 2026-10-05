@@ -15,18 +15,14 @@ dependencyResolutionManagement {
     }
 }
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-}
-
 rootProject.name = "AndroidArchSample"
 
 include(":app")
 include(":core:common")
-include(":core:ui")
 include(":core:network")
-include(":core:preferences")
+include(":core:settings")
 include(":core:testing")
+include(":design-system")
 include(":feature:characters:domain")
 include(":feature:characters:data")
 include(":feature:characters:presentation")

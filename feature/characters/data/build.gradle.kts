@@ -1,25 +1,30 @@
 plugins {
     id("androidarchsample.android.library")
     id("androidarchsample.hilt")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "ru.marwinka.androidarchsample.data"
+    namespace = "ru.marwinka.androidarchsample.feature.characters.data"
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
 }
 
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:network"))
-    implementation(project(":core:preferences"))
+    implementation(project(":core:settings"))
     implementation(project(":feature:characters:domain"))
 
-    implementation(libs.kotlinx.coroutines.android)
     // api: entities and DAOs are compiled into AppDatabase declared in :app
     api(libs.room.runtime)
     implementation(libs.room.ktx)
 
-    testImplementation(libs.mockk)
-    testImplementation(libs.turbine)
-    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(project(":core:testing"))
+    testImplementation(libs.turbine)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+    kspTest(libs.room.compiler)
 }

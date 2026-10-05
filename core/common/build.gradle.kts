@@ -1,12 +1,9 @@
 plugins {
-    id("androidarchsample.android.library")
-    id("androidarchsample.hilt")
-}
-
-android {
-    namespace = "ru.marwinka.androidarchsample.core.common"
+    id("androidarchsample.jvm.library")
 }
 
 dependencies {
-    implementation(libs.kotlinx.coroutines.android)
+    api(libs.kotlinx.coroutines.core)
+    // JSR-330 annotations only; Hilt bindings live in :app
+    implementation(libs.javax.inject)
 }

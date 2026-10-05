@@ -4,33 +4,17 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.marwinka.androidarchsample.domain.repository.CharacterRepository
-import ru.marwinka.androidarchsample.domain.usecase.GetCharacterDetailUseCase
-import ru.marwinka.androidarchsample.domain.usecase.GetCharactersUseCase
-import ru.marwinka.androidarchsample.domain.usecase.GetSortOrderUseCase
-import ru.marwinka.androidarchsample.domain.usecase.RefreshCharactersUseCase
-import ru.marwinka.androidarchsample.domain.usecase.SetSortOrderUseCase
-import ru.marwinka.androidarchsample.domain.usecase.ToggleFavoriteUseCase
+import ru.marwinka.androidarchsample.feature.characters.domain.repository.CharacterRepository
+import ru.marwinka.androidarchsample.feature.characters.domain.repository.CharacterSettingsRepository
+import ru.marwinka.androidarchsample.feature.characters.domain.usecase.ObserveCharactersUseCase
 
-/** Provides domain use cases. */
+/** Use cases carry no DI annotations, so they are provided here, unscoped. */
 @Module
 @InstallIn(SingletonComponent::class)
 object DomainModule {
     @Provides
-    fun provideGetCharacters(repository: CharacterRepository) = GetCharactersUseCase(repository)
-
-    @Provides
-    fun provideGetCharacterDetail(repository: CharacterRepository) = GetCharacterDetailUseCase(repository)
-
-    @Provides
-    fun provideGetSortOrder(repository: CharacterRepository) = GetSortOrderUseCase(repository)
-
-    @Provides
-    fun provideRefreshCharacters(repository: CharacterRepository) = RefreshCharactersUseCase(repository)
-
-    @Provides
-    fun provideSetSortOrder(repository: CharacterRepository) = SetSortOrderUseCase(repository)
-
-    @Provides
-    fun provideToggleFavorite(repository: CharacterRepository) = ToggleFavoriteUseCase(repository)
+    fun provideObserveCharacters(
+        repository: CharacterRepository,
+        settings: CharacterSettingsRepository,
+    ) = ObserveCharactersUseCase(repository, settings)
 }
